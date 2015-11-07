@@ -17,3 +17,50 @@ background-color: #bbbbbb;
 height: 50vh;
 width: 100vw;
 }
+table {
+    margin: 0px auto;
+}
+
+.QuestionText {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 30px;
+  min-height: 50px;
+  width: 100vw;
+  resize: none;
+  text-align: center;
+}
+
+.AnswerText {
+  border-radius:8px;
+  border:2px solid #d02718;
+  outline:none;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
+	padding:10px 36px;
+  width:300px;
+}
+
+.AnswerButton {
+	-moz-box-shadow:inset 0px 0px 0px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 0px 0px 0px #f5978e;
+	box-shadow:inset 0px 0px 0px 0px #f5978e;
+	background-color:#f24537;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	border:2px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+  font-family: 'Source Sans Pro', sans-serif;
+	font-size:15px;
+	padding:10px 36px;
+	text-decoration:none;
+}
+.AnswerButton:hover {
+	background-color:#c62d1f;
+}
+.AnswerButton:active {
+	position:relative;
+	top:1px;
+}
