@@ -1,0 +1,19 @@
+
+.TitleBar {
+
+
+}
+
+.BattleScreenAnimation {
+background-color: #b0c4de;
+height: 50vh;
+width: 100vw;
+margin-left: 0;
+padding-left 0;
+}
+
+.BattleScreenFlashCards {
+background-color: #bbbbbb;
+height: 50vh;
+width: 100vw;
+}
