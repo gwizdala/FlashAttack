@@ -1,6 +1,6 @@
-var controller = function(view, model){
+var controller = function(v, m){
 
-
+var c = m.getCard();
 
   
 }

@@ -2,6 +2,9 @@
 <html>
 <head>
   <script src="http://localhost:35729/livereload.js"></script>
+  <script src="./view.js"></script>
+  <script src="./model.js"></script>
+  <script src="./controller.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>  <link rel="stylesheet" type="text/css" href="FlashAttack.css">
 </head>
 
@@ -37,6 +40,12 @@
   </form>
 </div>
 
+
+<script>
+v = new view();
+m = new model();
+c = new controller(v,m);
+</script>
 
 </body>
 </html>
