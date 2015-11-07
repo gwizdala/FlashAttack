@@ -7,9 +7,10 @@ var model = function() {
   this.cards = [{Question: "What is the first 3 Digits of PI?" Answer:"3.14"},
                 {Question: "What day is today?" Answer:"Saturday"}
                 ];
-}
+};
 
-//Publics
+
+
 model.prototype.getCard = function() {
   var card = this.cards[this.cardIndex];
   this.cardIndex += 1;
