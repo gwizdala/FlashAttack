@@ -17,7 +17,7 @@ var vm = this;
 		var correctAnswer = vm.c.Answer;
     var correct = false;
     if(answer != "") {
-  		if(answer.localeCompare(correctAnswer) == 0){
+  		if(answer.toLowerCase().localeCompare(correctAnswer.toLowerCase()) == 0){
         console.log("GOOD JOB");
         correct = true;
         if(!m.getCurrentGame().isVictory())
