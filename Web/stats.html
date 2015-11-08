@@ -12,7 +12,7 @@
     <td><p id="winLose"></p></td>
     </tr>
     <tr>
-      <td>
+      <td width ="100%" height="200">
         <canvas width="inherit" id="xpBar"></canvas>
       </td>
     </tr>
@@ -64,21 +64,103 @@
   <script>
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext("2d");
+
+    var animationIndex = 0;
+    var frameindex = 0;
+
+    // Player image
+    var playerReady = false;
+     var playerImage = new Image();
+     playerImage.onload = function () {
+    	 playerReady = true;
+    };
+     playerImage.src = "images/playerSprite.png";
+
+    // Monster image
+     var monsterReady = false;
+     var monsterImage = new Image();
+     monsterImage.onload = function () {
+    	 monsterReady = true;
+    };
+     monsterImage.src = "images/enemySprite.png";
+
+    // Game objects
+     var player = {};
+     var monster = {};
+
+    // refresh the game on player input
+    // This will move the players to correct locations
+    // based on resizing of display
+    function refresh() {
+
+    	 checkScaling();
+    };
+
+    // Check for scaling parameters
+    function checkScaling() {
+    	var heightScale = 1;
+    	var widthScale = 1;
+    	if(canvas.width < 1000) {
+    		widthScale = ( canvas.width / 1000);
+    	}
+    	if( canvas.height < 400) {
+    		heightScale = ( canvas.height / 400);
+    	}
+
+    	if(widthScale < heightScale)
+    	{
+    		 scaleFactor = widthScale;
+    	}
+    	else {
+    		 scaleFactor = heightScale;
+    	}
+    }
+
+    function render(){
+      if( frameindex >= 11){
+         frameindex = 0;
+         if(animationIndex == 1)
+         {
+           animationIndex = 0;
+         }
+         else {
+           animationIndex = 1;
+         }
+       }
+       else {
+         frameindex += 1;
+       }
+
+       if(sessionStorage.getItem("winCondition") == "true") {
+            ctx.clearRect(canvas.width/2 - 150*scaleFactor,canvas.height/2- 150*scaleFactor,300*scaleFactor, 300*scaleFactor);
+            ctx.drawImage( playerImage,(800 * animationIndex),0,800,800,canvas.width/2 - 150*scaleFactor,canvas.height/2- 150*scaleFactor,300*scaleFactor, 300*scaleFactor);
+       }
+       else{
+            ctx.clearRect(canvas.width/2 - 150*scaleFactor,canvas.height/2- 150*scaleFactor,300*scaleFactor, 300*scaleFactor);
+            ctx.drawImage( monsterImage,(1024 * thanimationIndex),0,1024,1024,canvas.width/2 - 150*scaleFactor,canvas.height/2- 150*scaleFactor,300*scaleFactor, 300*scaleFactor);
+       }
+    }
+
     parentSize = canvas.parentNode.getBoundingClientRect();
     canvas.width  = parentSize.width;
     canvas.height = parentSize.height;
-    if(sessionStorage.getItem("winCondition") == "true") {
-      ctx.beginPath();
-      ctx.fillStyle = "green";
-      ctx.rect(10, canvas.height/2, canvas.width - 20, 50);
-      ctx.fill();
-    }
-    else{
-      ctx.beginPath();
-      ctx.fillStyle = "red";
-      ctx.rect(10, canvas.height/2, canvas.width - 10, 50);
-      ctx.fill();
-    }
+
+    function main () {
+
+    	refresh();
+    	render();
+
+    	// Request to do this again ASAP
+    	requestAnimationFrame(function(){
+    		 main();
+    	});
+    };
+
+    var w = window;
+  	requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+    // Game Init
+  	refresh();
+  	main();
   </script>
 
 </body>
