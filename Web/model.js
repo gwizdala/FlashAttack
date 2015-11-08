@@ -39,15 +39,40 @@ currentGame.prototype.addCard = function(c) {
 
 var model = function() {
   //Privates
-  this.game = new currentGame(3,[{Question: "Write the value of PI up to 2 decimal places?",Answer:"3.14"},
-                {Question: "What is the name of this game",Answer:"flashattack"},
-                {Question: "What is 1+1",Answer:"2"},
-                {Question: "What is 0 factorial",Answer:"1"},
-                {Question: "what is 2 to the power 10",Answer:"1024"}
-              ]);
+  var myFirebaseRef = new Firebase("https://burning-heat-2213.firebaseio.com/");
+  var data = sessionStorage.getItem('data');
+  var flashCards = [];
+  var question = [],answer=[];
+  for(i=0;i<5;i++){
+
+              myFirebaseRef.child(data +"/cards/"+i+"/Question").on("value", function(snapshot){
+              question[i] = snapshot.val();
+              //alert(question[i]);
+                 //flashCards[i] = {Question:question[i],Answer:answer[i]};
+              });
+
+              myFirebaseRef.child(data +"/cards/"+i+"/Answer").on("value", function(snapshot) {
+              answer[i] = snapshot.val();
+             // alert(answer[i]);
+               //  flashCards[i] = {Question:question[i],Answer:answer[i]};
+              });
+               
+              //while(question == "" && answer == "");
+              
+  }
+    
+      for(i = 0 ; i < 5 ; i++)
+       flashCards[i] = {Question:question[i],Answer:answer[i]}; 
+        alert(flashCards.length);
+         this.game = new currentGame(3,flashCards);
+   
+   
+
+  //alert(flashCards.length);
+    //for(i = 0 ; i < 5 ; i++)
+    //  flashCards[i] = {Question:question[i],Answer:answer[i]};
 };
 
-
-model.prototype.getCurrentGame = function() {
+model.prototype.getCurrentGame = function(){
   return this.game;
 };
