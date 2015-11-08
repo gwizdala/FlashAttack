@@ -1,17 +1,9 @@
 // Create the canvas
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext("2d");
-var div = document.getElementById("battleScreenAnimation")
+var div = document.getElementById("battleScreenAnimation");
 canvas.width = div.clientWidth;
 canvas.height = div.clientHeight;
-
-// Background image
-/*var bgReady = false;
-var bgImage = new Image();
-bgImage.onload = function () {
-	bgReady = true;
-};
-bgImage.src = "images/background.png";*/
 
 // Player image
 var playerReady = false;
@@ -54,8 +46,11 @@ var reset = function () {
 // Update game objects
 var update = function (modifier) {
 
-/*	if ( Reset scenario ) {
-		++monstersCaught;
+/*	if( Attack Scenario) {
+
+}
+
+	if ( Reset scenario ) {
 		reset();
 	}*/
 };
@@ -63,19 +58,46 @@ var update = function (modifier) {
 // Draw everything
 var render = function () {
 
+	//Variables to be sent by the view
+	var numPlayerLives = 3;
+	var numPlayerLivesLeft = 3;
+	var numMonsterLives = 50;
+	var numMonsterLivesLeft = 30;
+
+	// Player paint
 	if (playerReady) {
 		ctx.drawImage(playerImage, player.x, player.y);
 	}
 
+	// Monster Paint
 	if (monsterReady) {
 		ctx.drawImage(monsterImage, monster.x, monster.y);
+
+		// Total Monster Lives
+		// Rectangle is 500x56
+		ctx.beginPath();
+		ctx.strokeStyle = "white";
+		ctx.rect((canvas.width - 505), 5, 500, 56);
+		ctx.lineWidth="3";
+		ctx.stroke();
+		// Monster Lives Left
+		ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.rect((canvas.width - 505), 5, 500*(numMonsterLivesLeft/numMonsterLives), 56);
+		ctx.fill();
+		ctx.stroke();
 	}
 
 	// Player Lives Left
   if (heartReady) {
-    ctx.drawImage(heartImage, heart.x, heart.y);
+		// Heart is 64x56
+		heart.y = 5;
+		for(var i = 0; i < numPlayerLivesLeft; i++) {
+					heart.x = i*67 + 5;
+			    ctx.drawImage(heartImage, heart.x, heart.y);
+		}
   }
-  // Monster Lives Left
+
 };
 
 // The main game loop
