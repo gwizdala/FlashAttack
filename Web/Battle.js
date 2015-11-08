@@ -199,11 +199,11 @@ Battle.prototype.render = function () {
 			this.ctx.fill();
 			this.ctx.stroke();
 			// Add amount of cards Left
-			/*this.ctx.fillStyle = "rgb(250, 250, 250)";
-			this.ctx.font = "Source Sans Pro";
-			this.ctx.textAlign = "left";
-			this.ctx.fillText(this.numMonsterLivesLeft + "/" this.numMonsterLives, 500*this.scaleFactor, 56*this.scaleFactor);
-			this.ctx.textBaseline = "top";*/
+			this.ctx.fillStyle = "rgb(250, 250, 250)";
+			this.ctx.font = "15px Source Sans Pro";
+			this.ctx.textAlign = "right";
+			this.ctx.fillText((this.numMonsterLivesLeft.toString() + "/" + this.numMonsterLives.toString()), this.canvas.width - 10*this.scaleFactor, 56*this.scaleFactor);
+			this.ctx.textBaseline = "top";
 	}
 
 	// Player Lives Left
