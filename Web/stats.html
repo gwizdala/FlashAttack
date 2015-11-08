@@ -13,17 +13,17 @@
     </tr>
     <tr>
       <td>
-        <canvas id="xpBar"></canvas>
+        <canvas width="inherit" id="xpBar"></canvas>
       </td>
     </tr>
     <tr>
       <td>
-        <p id="totalTimeToAnswer"></p>
+        <p id="totalTimeToAnswer" class="DeckTable"></p>
       </td>
     </tr>
     <tr>
       <td>
-        <p id="averageTimePerAnswer"></p>
+        <p id="averageTimePerAnswer"  class="DeckTable"></p>
       </td>
     </tr>
     <tr>
@@ -40,19 +40,46 @@
 
   <script text/javascript>
     var w = document.getElementById("winLose");
+    var totTime = document.getElementById("totalTimeToAnswer");
+    var avgTime = document.getElementById("averageTimePerAnswer")
       if(sessionStorage.getItem("winCondition") == "true") {
         w.innerHTML = "YOU WIN!";
         w.className = "WinClass";
+        totTime.innerHTML = "Total Time: " + sessionStorage.getItem("totalTime") + "s";
+        //This is technically incorrect, since this must hangle any size #cards. This is only 5 for the prototype
+        avgTime.innerHTML = "Average Time Per Answer: " + sessionStorage.getItem("totalTime")/5 + "s";
         var audio = new Audio('Sounds/tada.mp3');
         audio.play();
       }
       else {
         w.innerHTML = "YOU LOST";
         w.className = "LossClass";
+        totTime.innerHTML = "Total Time: " + sessionStorage.getItem("totalTime") + "s";
+        avgTime.innerHTML = "Average Time Per Answer: DID NOT COMPLETE";
         var audio = new Audio('Sounds/failhorn.mp3');
         audio.play();
       }
-      </script>
+  </script>
+
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext("2d");
+    parentSize = canvas.parentNode.getBoundingClientRect();
+    canvas.width  = parentSize.width;
+    canvas.height = parentSize.height;
+    if(sessionStorage.getItem("winCondition") == "true") {
+      ctx.beginPath();
+      ctx.fillStyle = "green";
+      ctx.rect(10, canvas.height/2, canvas.width - 20, 50);
+      ctx.fill();
+    }
+    else{
+      ctx.beginPath();
+      ctx.fillStyle = "red";
+      ctx.rect(10, canvas.height/2, canvas.width - 10, 50);
+      ctx.fill();
+    }
+  </script>
 
 </body>
 </html>

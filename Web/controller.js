@@ -26,11 +26,11 @@ var vm = this;
           getnewCard();
         }
         else {
-					sessionStorage.setItem("winCondition", true);
          // vm.end=new Date();
         //  vm.totalTime=vm.end-vm.start;
         totalTime=(new Date() - vm.start)/1000;
-      alert(totalTime);
+				sessionStorage.setItem("winCondition", true, "totalTime", totalTime);			
+				sessionStorage.setItem("totalTime", totalTime);
           window.location= "stats.html";
         }
   		}
@@ -43,14 +43,13 @@ var vm = this;
           v.updateBattle(correct,m.getCurrentGame().currentLives(),m.getCurrentGame().currentBossLives());
           getnewCard();
         }else {
-					sessionStorage.setItem("winCondition", false);
           //vm.end=new Date();
           //vm.totalTime=vm.end-vm.start;
         totalTime=(new Date() - vm.start)/1000;
-      alert(totalTime);
-                   window.location= "stats.html";
-        }
-
+				sessionStorage.setItem("winCondition", false);
+				sessionStorage.setItem("totalTime", totalTime);
+        window.location= "stats.html";
+				}
   		}
     }
     //clear answer text
@@ -69,7 +68,7 @@ var vm = this;
     m.handleSnapshot(snapshot.val());
     v.startRender(m.getCurrentGame().getOriginalLives(),m.getCurrentGame().getOriginalLength());
    vm.start = new Date();
- 
+
    getnewCard();
   })
 
