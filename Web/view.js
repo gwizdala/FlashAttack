@@ -14,6 +14,10 @@ view.prototype.startRender = function() {
   this.b.startRender();
 }
 
+view.prototype.updateBattle = function(){
+  this.b.update();
+}
+
 view.prototype.setQuestionBox = function() {
 return this.questionBox;
 }
