@@ -14,7 +14,7 @@ view.prototype.startRender = function(originalPlayerLives, originalMonsterLives)
   this.b.startRender(originalPlayerLives, originalMonsterLives);
 }
 
-view.prototype.updateBattle = function( isCorrect, newPlayerLives, newMonsterLives){
+view.prototype.updateBattle = function(isCorrect, newPlayerLives, newMonsterLives){
   this.b.update(isCorrect, newPlayerLives, newMonsterLives);
 }
 

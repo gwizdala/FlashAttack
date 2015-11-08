@@ -115,20 +115,26 @@ Battle.prototype.render = function () {
 		this.ctx.drawImage(this.monsterImage, this.monster.x, this.monster.y,
 			this.monsterImage.width*this.scaleFactor, this.monsterImage.height*this.scaleFactor);
 
-		// Total Monster Lives
-		// Rectangle is 500x56
-		this.ctx.beginPath();
-		this.ctx.strokeStyle = "white";
-		this.ctx.rect((this.canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor, 500*this.scaleFactor, 56*this.scaleFactor);
-		this.ctx.lineWidth="3";
-		this.ctx.stroke();
-		// Monster Lives Left
-		this.ctx.beginPath();
-		this.ctx.fillStyle = "red";
-		this.ctx.rect((this.canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor,
-									500*(this.numMonsterLivesLeft/this.numMonsterLives)*this.scaleFactor, 56*this.scaleFactor);
-		this.ctx.fill();
-		this.ctx.stroke();
+			// Total Monster Lives
+			// Rectangle is 500x56
+			this.ctx.beginPath();
+			this.ctx.strokeStyle = "white";
+			this.ctx.rect((this.canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor, 500*this.scaleFactor, 56*this.scaleFactor);
+			this.ctx.lineWidth="3";
+			this.ctx.stroke();
+			// Monster Lives Left
+			this.ctx.beginPath();
+			this.ctx.fillStyle = "red";
+			this.ctx.rect((this.canvas.width - 505*(this.numMonsterLivesLeft/this.numMonsterLives)*this.scaleFactor), 5*this.scaleFactor,
+										500*(this.numMonsterLivesLeft/this.numMonsterLives)*this.scaleFactor, 56*this.scaleFactor);
+			this.ctx.fill();
+			this.ctx.stroke();
+			// Add amount of cards Left
+			/*this.ctx.fillStyle = "rgb(250, 250, 250)";
+			this.ctx.font = "Source Sans Pro";
+			this.ctx.textAlign = "left";
+			this.ctx.fillText(this.numMonsterLivesLeft + "/" this.numMonsterLives, 500*this.scaleFactor, 56*this.scaleFactor);
+			this.ctx.textBaseline = "top";*/
 	}
 
 	// Player Lives Left
