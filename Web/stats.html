@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>  <link rel="stylesheet" type="text/css" href="Select.css">
+</head>
+
+<body style="margin: 0;">
+  <table>
+    <tr>
+    <td><script text/javascript>
+        if(sessionStorage.getItem("winCondition") == true) {
+          document.write("YOU WIN!");
+        }
+        else {
+          document.write("YOU LOST");
+        }
+        </script></td>
+    </tr>
+    <tr>
+      <td align="center"> <input id="mainMenu" type="button" class="a" value="Main Menu"></td>
+    </tr>
+  </table>
+
+  <script text/javascript>
+  // Save data to sessionStorage
+  document.getElementById("mainMenu").addEventListener("click",function(){
+     window.location= "index.html";
+  });
+  </script>
+
+</body>
+</html>

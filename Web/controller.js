@@ -26,7 +26,8 @@ var vm = this;
           getnewCard();
         }
         else {
-          alert("Victory!");
+					sessionStorage.setItem("winCondition", true);
+          window.location= "stats.html";
         }
   		}
   		else{
@@ -38,7 +39,8 @@ var vm = this;
           v.updateBattle(correct,m.getCurrentGame().currentLives(),m.getCurrentGame().currentBossLives());
           getnewCard();
         }else {
-          alert("Game Over!");
+					sessionStorage.setItem("winCondition", false);
+          window.location= "stats.html";
         }
 
   		}
