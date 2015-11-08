@@ -39,39 +39,31 @@ currentGame.prototype.addCard = function(c) {
 
 var model = function() {
   //Privates
-  var myFirebaseRef = new Firebase("https://burning-heat-2213.firebaseio.com/");
-  var data = sessionStorage.getItem('data');
-  var flashCards = [];
-  var question = [],answer=[];
-  for(i=0;i<5;i++){
 
-              myFirebaseRef.child(data +"/cards/"+i+"/Question").on("value", function(snapshot){
-              question[i] = snapshot.val();
-              //alert(question[i]);
-                 //flashCards[i] = {Question:question[i],Answer:answer[i]};
-              });
-
-              myFirebaseRef.child(data +"/cards/"+i+"/Answer").on("value", function(snapshot) {
-              answer[i] = snapshot.val();
-             // alert(answer[i]);
-               //  flashCards[i] = {Question:question[i],Answer:answer[i]};
-              });
-               
-              //while(question == "" && answer == "");
-              
-  }
-    
-      for(i = 0 ; i < 5 ; i++)
-       flashCards[i] = {Question:question[i],Answer:answer[i]}; 
-        alert(flashCards.length);
-         this.game = new currentGame(3,flashCards);
-   
-   
 
   //alert(flashCards.length);
     //for(i = 0 ; i < 5 ; i++)
     //  flashCards[i] = {Question:question[i],Answer:answer[i]};
 };
+
+model.prototype.databaseCall = function(callback) {
+  var myFirebaseRef = new Firebase("https://burning-heat-2213.firebaseio.com/");
+  var data = sessionStorage.getItem('data');
+  var flashCards = [];
+  var render = false;
+  var question = [],answer=[];
+    myFirebaseRef.child(data).on("value", callback);
+
+}
+model.prototype.handleSnapshot = function(snapshot){
+cards = [];
+  snapshot.cards.forEach(function(element,index,array){
+    console.log(element);
+    cards.push({Question:element.Question,Answer:element.Answer})
+  })
+this.game = new currentGame(3,cards);
+
+}
 
 model.prototype.getCurrentGame = function(){
   return this.game;

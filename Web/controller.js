@@ -1,8 +1,8 @@
 
 var controller = function(v, m){
 var vm = this;
-  console.log("Starting game Lives:" + m.getCurrentGame().currentLives())
-  getnewCard();
+  //console.log("Starting game Lives:" + m.getCurrentGame().currentLives())
+//
 	v.submit().addEventListener("click", function(){
     checkCurrentAnswer();
   });
@@ -50,9 +50,17 @@ var vm = this;
 
 	function getnewCard(){
 		vm.c = m.getCurrentGame().getCard();
+    console.log(vm.c);
 		v.setQuestionText(vm.c.Question);
 	}
 
-  v.startRender(m.getCurrentGame().getOriginalLives(),m.getCurrentGame().getOriginalLength());
+
+  m.databaseCall(function(snapshot) {
+    m.handleSnapshot(snapshot.val());
+    v.startRender(m.getCurrentGame().getOriginalLives(),m.getCurrentGame().getOriginalLength());
+    getnewCard();
+  })
+
+
 
 }
