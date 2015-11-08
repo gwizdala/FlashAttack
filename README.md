@@ -9,7 +9,7 @@ Current Progress:
 - [x] complete model/view/controller logic for battle
 - [x] complete standard battle animations
 - [x] store and recieve data from Firebase
-- [ ] enable select menu to load data from Firebase
+- [x] enable select menu to load data from Firebase
 - [ ] enable card editing and storage for player (includes social integration)
 
 Stretch Goals
