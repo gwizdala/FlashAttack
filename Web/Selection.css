@@ -1,0 +1,20 @@
+
+.DeckList {
+  width: 70vw;
+  height: 70vh;
+  position: absolute;
+  align-self: center;
+  display: block;
+}
+.DeckTable {
+  width: inherit;
+  height: inherit;
+}
+.Header {
+  width: 100vw;
+  height: 30vh;
+}
+.DeckItem {
+  height: 20%;
+  align-items: center;
+}
