@@ -27,6 +27,10 @@ var vm = this;
         }
         else {
 					sessionStorage.setItem("winCondition", true);
+         // vm.end=new Date();
+        //  vm.totalTime=vm.end-vm.start;
+        totalTime=(new Date() - vm.start)/1000;
+      alert(totalTime);
           window.location= "stats.html";
         }
   		}
@@ -40,7 +44,11 @@ var vm = this;
           getnewCard();
         }else {
 					sessionStorage.setItem("winCondition", false);
-          window.location= "stats.html";
+          //vm.end=new Date();
+          //vm.totalTime=vm.end-vm.start;
+        totalTime=(new Date() - vm.start)/1000;
+      alert(totalTime);
+                   window.location= "stats.html";
         }
 
   		}
@@ -60,7 +68,9 @@ var vm = this;
   m.databaseCall(function(snapshot) {
     m.handleSnapshot(snapshot.val());
     v.startRender(m.getCurrentGame().getOriginalLives(),m.getCurrentGame().getOriginalLength());
-    getnewCard();
+   vm.start = new Date();
+ 
+   getnewCard();
   })
 
 
