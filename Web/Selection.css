@@ -44,8 +44,26 @@ a:visited {
 
 .DeckTable{
     font-family: 'Source Sans Pro', sans-serif;
-  font-size: 40px;
+    font-size: 40px;
+    min-height: 50px;
+    resize: none;
+    text-align: center;
+}
+
+.WinClass{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 80px;
   min-height: 50px;
   resize: none;
   text-align: center;
+  color: green;
+}
+
+.LossClass{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 80px;
+  min-height: 50px;
+  resize: none;
+  text-align: center;
+  color: red;
 }

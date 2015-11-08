@@ -2,21 +2,29 @@
 <html>
 <head>
 
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>  <link rel="stylesheet" type="text/css" href="Select.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="Selection.css">
 </head>
 
 <body style="margin: 0;">
-  <table>
+  <table width="100%">
     <tr>
-    <td><script text/javascript>
-    console.log(sessionStorage.getItem("winCondition"));
-        if(sessionStorage.getItem("winCondition") == "true") {
-          document.write("YOU WIN!");
-        }
-        else {
-          document.write("YOU LOST");
-        }
-        </script></td>
+    <td><p id="winLose"></p></td>
+    </tr>
+    <tr>
+      <td>
+        <canvas id="xpBar"></canvas>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p id="totalTimeToAnswer"></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p id="averageTimePerAnswer"></p>
+      </td>
     </tr>
     <tr>
       <td align="center"> <input id="mainMenu" type="button" class="a" value="Main Menu"></td>
@@ -29,6 +37,22 @@
      window.location= "index.html";
   });
   </script>
+
+  <script text/javascript>
+    var w = document.getElementById("winLose");
+      if(sessionStorage.getItem("winCondition") == "true") {
+        w.innerHTML = "YOU WIN!";
+        w.className = "WinClass";
+        var audio = new Audio('Sounds/tada.mp3');
+        audio.play();
+      }
+      else {
+        w.innerHTML = "YOU LOST";
+        w.className = "LossClass";
+        var audio = new Audio('Sounds/failhorn.mp3');
+        audio.play();
+      }
+      </script>
 
 </body>
 </html>
