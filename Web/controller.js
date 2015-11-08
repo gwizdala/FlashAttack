@@ -37,4 +37,6 @@ var vm = this;
 		v.setQuestionText(vm.c.Question);
 	}
 
+  v.startRender();
+
 }

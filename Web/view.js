@@ -1,5 +1,6 @@
 var view = function() {
 var vm = this;
+vm.b = new Battle();
 vm.answerBox = document.getElementById("AnswerTextBox");
 vm.questionBox = document.getElementById("QuestionTextBox");
 vm.submitButton = document.getElementById("SubmitButton");
@@ -7,6 +8,10 @@ if(vm.answerBox == null || vm.questionBox == null)
 {
   alert("Answer/Question box null, won't work");
 }
+}
+
+view.prototype.startRender = function() {
+  this.b.startRender();
 }
 
 view.prototype.setQuestionBox = function() {

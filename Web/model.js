@@ -8,11 +8,11 @@ currentGame.prototype.getCard = function() {
 };
 
 currentGame.prototype.currentLives = function() {
-return this.lives;
+  return this.lives;
 };
 
 currentGame.prototype.currentBossLives = function() {
-return this.cards.length;
+  return this.cards.length;
 };
 currentGame.prototype.loseLife = function() {
   this.lives -= 1;

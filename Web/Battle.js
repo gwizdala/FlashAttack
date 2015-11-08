@@ -1,80 +1,93 @@
+var Battle = function() {
+var b = this;
+// Timing
+b.then = Date.now();
+
 // Create the canvas
-var canvas = document.querySelector('canvas');
-var ctx = canvas.getContext("2d");
-var div = document.getElementById("battleScreenAnimation");
-canvas.width = div.clientWidth;
-canvas.height = div.clientHeight;
+b.canvas = document.querySelector('canvas');
+b.ctx = b.canvas.getContext("2d");
+b.div = document.getElementById("battleScreenAnimation");
+b.canvas.width = b.div.clientWidth;
+b.canvas.height = b.div.clientHeight;
+
+//Variables to be sent by the view
+b.numPlayerLives;
+b.numPlayerLivesLeft;
+b.numMonsterLives;
+b.numMonsterLivesLeft;
 
 // Scaling factor
-var scaleFactor = 1;
+b.scaleFactor = 1;
 
 // Player image
-var playerReady = false;
-var playerImage = new Image();
-playerImage.onload = function () {
-	playerReady = true;
+b.playerReady = false;
+b.playerImage = new Image();
+b.playerImage.onload = function () {
+	b.playerReady = true;
 };
-playerImage.src = "images/player.png";
+b.playerImage.src = "images/player.png";
 
 // Heart image (lives)
-var heartReady = false;
-var heartImage = new Image();
-heartImage.onload = function () {
-	heartReady = true;
+b.heartReady = false;
+b.heartImage = new Image();
+b.heartImage.onload = function () {
+	b.heartReady = true;
 };
-heartImage.src = "images/heart.png";
+b.heartImage.src = "images/heart.png";
 
 // Monster image
-var monsterReady = false;
-var monsterImage = new Image();
-monsterImage.onload = function () {
-	monsterReady = true;
+b.monsterReady = false;
+b.monsterImage = new Image();
+b.monsterImage.onload = function () {
+	b.monsterReady = true;
 };
-monsterImage.src = "images/monster.png";
+b.monsterImage.src = "images/monster.png";
 
 // Game objects
-var player = {};
-var heart = {};
-var monster = {};
+b.player = {};
+b.heart = {};
+b.monster = {};
+
+}
 
 // refresh the game on player input
 // This will move the players to correct locations
 // based on resizing of display
-var refresh = function () {
-	canvas.width = div.clientWidth;
-	canvas.height = div.clientHeight;
+Battle.prototype.refresh = function () {
+	this.canvas.width = this.div.clientWidth;
+	this.canvas.height = this.div.clientHeight;
 
-	checkScaling();
+	this.checkScaling();
 
-	player.x = 50*scaleFactor;
-	player.y = canvas.height - 320*scaleFactor;
+	this.player.x = 50*this.scaleFactor;
+	this.player.y = this.canvas.height - 320*this.scaleFactor;
 
-	monster.x = canvas.width - (370*scaleFactor);
-	monster.y = canvas.height - 320*scaleFactor;
+	this.monster.x = this.canvas.width - (370*this.scaleFactor);
+	this.monster.y = this.canvas.height - 320*this.scaleFactor;
 };
 
 // Check for scaling parameters
-var checkScaling = function() {
+Battle.prototype.checkScaling = function() {
 	var heightScale = 1;
 	var widthScale = 1;
-	if(canvas.width < 1000) {
-		widthScale = (canvas.width / 1000);
+	if(this.canvas.width < 1000) {
+		widthScale = (this.canvas.width / 1000);
 	}
-	if(canvas.height < 400) {
-		heightScale = (canvas.height / 400);
+	if(this.canvas.height < 400) {
+		heightScale = (this.canvas.height / 400);
 	}
 
 	if(widthScale < heightScale)
 	{
-		scaleFactor = widthScale;
+		this.scaleFactor = widthScale;
 	}
 	else {
-		scaleFactor = heightScale;
+		this.scaleFactor = heightScale;
 	}
 }
 
 // Update game objects
-var update = function (modifier) {
+Battle.prototype.update = function (modifier) {
 
 /*	if( Attack Scenario) {
 
@@ -83,73 +96,75 @@ var update = function (modifier) {
 	if ( refresh scenario ) {
 		refresh();
 	}*/
-		refresh();
+		this.refresh();
 };
 
 // Draw everything
-var render = function () {
-
-	//Variables to be sent by the view
-	var numPlayerLives = 3;
-	var numPlayerLivesLeft = 3;
-	var numMonsterLives = 50;
-	var numMonsterLivesLeft = 30;
+Battle.prototype.render = function () {
 
 	// Player paint
-	if (playerReady) {
-		ctx.drawImage(playerImage, player.x, player.y, playerImage.width*scaleFactor, playerImage.height*scaleFactor);
+	if (this.playerReady) {
+		this.ctx.drawImage(this.playerImage, this.player.x, this.player.y,
+			this.playerImage.width*this.scaleFactor, this.playerImage.height*this.scaleFactor);
 	}
 
 	// Monster Paint
-	if (monsterReady) {
-		ctx.drawImage(monsterImage, monster.x, monster.y, monsterImage.width*scaleFactor, monsterImage.height*scaleFactor);
+	if (this.monsterReady) {
+		this.ctx.drawImage(this.monsterImage, this.monster.x, this.monster.y,
+			this.monsterImage.width*this.scaleFactor, this.monsterImage.height*this.scaleFactor);
 
 		// Total Monster Lives
 		// Rectangle is 500x56
-		ctx.beginPath();
-		ctx.strokeStyle = "white";
-		ctx.rect((canvas.width - (505*scaleFactor)), 5*scaleFactor, 500*scaleFactor, 56*scaleFactor);
-		ctx.lineWidth="3";
-		ctx.stroke();
+		this.ctx.beginPath();
+		this.ctx.strokeStyle = "white";
+		this.ctx.rect((this.canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor, 500*this.scaleFactor, 56*this.scaleFactor);
+		this.ctx.lineWidth="3";
+		this.ctx.stroke();
 		// Monster Lives Left
-		ctx.beginPath();
-		ctx.fillStyle = "red";
-		ctx.rect((canvas.width - (505*scaleFactor)), 5*scaleFactor, 500*(numMonsterLivesLeft/numMonsterLives)*scaleFactor, 56*scaleFactor);
-		ctx.fill();
-		ctx.stroke();
+		this.ctx.beginPath();
+		this.ctx.fillStyle = "red";
+		this.ctx.rect((canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor,
+									500*(this.numMonsterLivesLeft/this.numMonsterLives)*this.scaleFactor, 56*this.scaleFactor);
+		this.ctx.fill();
+		this.ctx.stroke();
 	}
 
 	// Player Lives Left
-  if (heartReady) {
+  if (this.heartReady) {
 		// Heart is 64x56
-		heart.y = 5;
-		for(var i = 0; i < numPlayerLivesLeft; i++) {
-					heart.x = (i*heartImage.width + 5)*scaleFactor;
-			    ctx.drawImage(heartImage, heart.x, heart.y, heartImage.width*scaleFactor, heartImage.height*scaleFactor);
+		this.heart.y = 5;
+		for(var i = 0; i < this.numPlayerLivesLeft; i++) {
+					this.heart.x = (i*this.heartImage.width + 5)*this.scaleFactor;
+			    this.ctx.drawImage(this.heartImage, this.heart.x, this.heart.y,
+						this.heartImage.width*this.scaleFactor, this.heartImage.height*this.scaleFactor);
 		}
   }
 
 };
 
 // The main game loop
-var main = function () {
+Battle.prototype.main = function () {
+	var b = this;
 	var now = Date.now();
-	var delta = now - then;
+	var delta = now - this.then;
 
-	update(delta / 1000);
-	render();
+	this.update(delta / 1000);
+	this.render();
 
 	then = now;
 
 	// Request to do this again ASAP
-	requestAnimationFrame(main);
+	requestAnimationFrame(function(){
+		b.main();
+	});
 };
 
-// Cross-browser support for requestAnimationFrame
-var w = window;
-requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+Battle.prototype.startRender = function() {
+	// Cross-browser support for requestAnimationFrame
+	var w = window;
+	requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
-// Game Init
-var then = Date.now();
-refresh();
-main();
+	// Game Init
+	this.refresh();
+	this.main();
+}
