@@ -32,7 +32,7 @@ currentGame.prototype.isVictory = function() {
   return this.cards.length == 0;
 };
 currentGame.prototype.addCard = function(c) {
-  return this.cards.push(c);
+  return this.cards.unshift(c);
 }
 
 
