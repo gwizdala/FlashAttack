@@ -4,39 +4,51 @@
 <head>
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="Selection.css">
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 </head>
 <body>
 
 
-<table width="100%">
+<table id="Table" width="100%">
   <tr>
     <td align="center">
       <img src="images/FlashAttack_Logo1.png" alt="Logo" style="width:70%;height:70%;">
     </td>
   </tr>
-  <tr>
-    <td align="center"> <input id="chem" type="button" class="a" value="Chemistry"></td>
-  </tr>
-  <tr>
-    <td align="center"><input id="math" type="button" class="a" value="Math"></td>
-  </tr>
 </table>
 
-  <script text/javascript>
+<script text/javascript>
 	// Save data to sessionStorage
-	document.getElementById("chem").addEventListener("click",function(){
-		// Save data to sessionStorage
-		sessionStorage.setItem('data', 'Chemistry');
-		 window.location= "FlashAttack.html";
-	});
+  function addElement(key) {
+    var table = document.getElementById("Table");
+    table.innerHTML += '  <tr> <td align="center"><input id= ' + key + ' type="button" class="a" value='+ key +'></td> </tr>'
+  }
 
-		document.getElementById("math").addEventListener("click",function(){
-			sessionStorage.setItem('data', 'Maths');
-			window.location= "FlashAttack.html";
-	});
+  databaseCall = function(callback) {
+    var myFirebaseRef = new Firebase("https://burning-heat-2213.firebaseio.com/");
+    var data = "Deck"
+    var render = false;
+      myFirebaseRef.child(data).on("value", callback);
+  }
+
+  databaseCall(function(result){
+    var x = [];
+    result.val().forEach(function(element,index,array){
+      addElement(element);
+      x = array;
+    });
+    x.forEach(function(element,index,array){
+      var item = document.getElementById(element);
+      item.addEventListener("click", function(){
+              sessionStorage.setItem('data', element);
+              window.location= "FlashAttack.html";
+      });
+    });
+
+
+  });
 
 </script>
 
 
 </body>
-</head>
