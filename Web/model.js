@@ -1,18 +1,26 @@
 
 var currentGame = function(lives, cards) {
+  this.oLive = lives;
+  this.oCardLength = cards.length;
   this.lives = lives;
   this.cards = cards;
 };
+currentGame.prototype.getOriginalLives = function() {
+  return this.oLive;
+}
+currentGame.prototype.getOriginalLength = function() {
+  return this.oCardLength;
+}
 currentGame.prototype.getCard = function() {
   return this.cards.pop();
 };
 
 currentGame.prototype.currentLives = function() {
-  return this.lives;
+return this.lives;
 };
 
 currentGame.prototype.currentBossLives = function() {
-  return this.cards.length;
+return this.cards.length;
 };
 currentGame.prototype.loseLife = function() {
   this.lives -= 1;
@@ -31,7 +39,7 @@ currentGame.prototype.addCard = function(c) {
 
 var model = function() {
   //Privates
-  this.game = new currentGame(3,[{Question: "Write the value of PI upto 2 decimal places?",Answer:"3.14"},
+  this.game = new currentGame(3,[{Question: "Write the value of PI up to 2 decimal places?",Answer:"3.14"},
                 {Question: "What is the name of this game",Answer:"flashattack"},
                 {Question: "What is 1+1",Answer:"2"},
                 {Question: "What is 0 factorial",Answer:"1"},

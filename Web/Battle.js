@@ -169,6 +169,9 @@ Battle.prototype.startRender = function(originalPlayerLives, originalMonsterLive
 	this.numPlayerLives = originalPlayerLives;
 	this.numMonsterLives = originalMonsterLives;
 
+	this.numPlayerLivesLeft = originalPlayerLives;
+	this.numMonsterLivesLeft = originalMonsterLives;
+
 	// Game Init
 	this.refresh();
 	this.main();

@@ -6,10 +6,13 @@ var vm = this;
 	v.submit().addEventListener("click",function() {
 		var answer = v.getAnswerText();
 		var correctAnswer = vm.c.Answer;
+    var correct = false;
 		if(answer.localeCompare(correctAnswer) == 0){
       console.log("GOOD JOB");
+      correct = true;
       if(!m.getCurrentGame().isVictory())
       {
+        v.updateBattle(correct,m.getCurrentGame().currentLives(),m.getCurrentGame().currentBossLives());
         getnewCard();
       }
       else {
@@ -18,16 +21,17 @@ var vm = this;
 		}
 		else{
       m.getCurrentGame().loseLife();
+      m.getCurrentGame().addCard(vm.c)
       console.log("LOST LIFE :(");
       if(!m.getCurrentGame().isGameOver())
       {
+        v.updateBattle(correct,m.getCurrentGame().currentLives(),m.getCurrentGame().currentBossLives());
         getnewCard();
       }else {
         alert("Game Over!");
       }
 
 		}
-
 	});
 
 
@@ -37,6 +41,6 @@ var vm = this;
 		v.setQuestionText(vm.c.Question);
 	}
 
-  v.startRender();
+  v.startRender(m.getCurrentGame().getOriginalLives(),m.getCurrentGame().getOriginalLength());
 
 }
