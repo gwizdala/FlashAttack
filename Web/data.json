@@ -5,7 +5,7 @@
     {"Question":"Write the value of PI upto 2 decimal places?", "Answer":"3.14"},
     {"Question":"Square of 9?", "Answer":"81"},
     {"Question":"What is 1+1", "Answer":"2"},
-    {"Question":"What is 0 factorial", "Answer":"0"},
+    {"Question":"What is 0 factorial", "Answer":"1"},
     {"Question":"what is 2 to the power 10", "Answer":"1024"}
 
 ]},
