@@ -1,6 +1,6 @@
 
 body {
-    background-color: grey;
+  background-color: #b0c4de;
 }
 
 
@@ -14,15 +14,32 @@ a:visited {
     background-color: transparent;
     text-decoration: none;
 }
-a:hover {
-    color: red;
-    background-color: transparent;
-    text-decoration: underline;
+
+.a {
+	-moz-box-shadow:inset 0px 0px 0px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 0px 0px 0px #f5978e;
+	box-shadow:inset 0px 0px 0px 0px #f5978e;
+	background-color:#f24537;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	border:2px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+  font-family: 'Source Sans Pro', sans-serif;
+	font-size:40px;
+	padding:10px 36px;
+	text-decoration:none;
+  outline:none;
+  width:300px;
 }
-a:active {
-    color: yellow;
-    background-color: transparent;
-    text-decoration: underline;
+.a:hover {
+	background-color:#c62d1f;
+}
+.a:active {
+	position:relative;
+	top:1px;
 }
 
 .DeckTable{

@@ -2,29 +2,37 @@
 
 <html>
 <head>
-  
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="Selection.css">
 </head>
 <body>
 
 
-<div class="Header">FlashAttack!</div>
-
-
-
-    <p id="chem">chemistry</p>
-    <p id="math">Maths</p>
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/FlashAttack_Logo1.png" alt="Logo" style="width:70%;height:70%;">
+    </td>
+  </tr>
+  <tr>
+    <td align="center"> <input id="chem" type="button" class="a" value="Chemistry"></td>
+  </tr>
+  <tr>
+    <td align="center"><input id="math" type="button" class="a" value="Math"></td>
+  </tr>
+</table>
 
   <script text/javascript>
-	// Save data to sessionStorage	
+	// Save data to sessionStorage
 	document.getElementById("chem").addEventListener("click",function(){
 		// Save data to sessionStorage
 		sessionStorage.setItem('data', 'Chemistry');
-		 window.location= "FlashAttack.html";  
+		 window.location= "FlashAttack.html";
 	});
 
 		document.getElementById("math").addEventListener("click",function(){
 			sessionStorage.setItem('data', 'Maths');
-			window.location= "FlashAttack.html";  	    
+			window.location= "FlashAttack.html";
 	});
 
 </script>
