@@ -34,8 +34,10 @@ var player = {};
 var heart = {};
 var monster = {};
 
-// Reset the game on player input
-var reset = function () {
+// refresh the game on player input
+// This will move the players to correct locations
+// based on resizing of display
+var refresh = function () {
 	player.x = 50;
 	player.y = canvas.height - 320;
 
@@ -50,13 +52,16 @@ var update = function (modifier) {
 
 }
 
-	if ( Reset scenario ) {
-		reset();
+	if ( refresh scenario ) {
+		refresh();
 	}*/
+		refresh();
 };
 
 // Draw everything
 var render = function () {
+	canvas.width = div.clientWidth;
+	canvas.height = div.clientHeight;
 
 	//Variables to be sent by the view
 	var numPlayerLives = 3;
@@ -120,5 +125,5 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 
 // Game Init
 var then = Date.now();
-reset();
+refresh();
 main();
