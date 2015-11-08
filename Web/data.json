@@ -1,5 +1,5 @@
 
-{"Deck":["Chemistry","Maths"],
+{"Deck":["Chemistry","Maths","Physics"],
     "Maths":{
 	"cards":[
     {"Question":"Write the value of PI upto 2 decimal places?", "Answer":"3.14"},
@@ -19,6 +19,18 @@
     {"Question":"True or false? An electron carries a positive charge", "Answer":"False"},
     {"Question":"What is the fourth most abundant element in the universe in terms of mass?", "Answer":"Carbon"}
 
+]},
+"Physics":
+
+{
+    "cards":[
+     {"Question":"Which instrument is used to measure altitudes in aircrafts ?", "Answer":"Altimeter"},
+      {"Question":"The property of a moving object to continue moving is what Galileo called", "Answer":"inertia"},
+      {"Question":"A car initially at rest accelerates in a straight line at 3 m/s². What will be its velocity after 2 seconds?", "Answer":"6"},
+      {"Question":"To accelerate a 6 kg mass at 2 m/s² requires a net force of __ Newtons", "Answer":"12"},
+      {"Question":"To report the ____ of an object, we must specify both its speed and its direction", "Answer":"velocity"}
+
 ]}
+
 
 }
