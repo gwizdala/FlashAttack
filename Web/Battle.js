@@ -156,6 +156,7 @@ Battle.prototype.main = function () {
 	var now = Date.now();
 	var delta = now - this.then;
 
+	this.refresh();
 	this.render();
 
 	then = now;
