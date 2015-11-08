@@ -1,0 +1,24 @@
+
+{"Deck":["Chemistry","Maths"],
+    "Maths":{
+	"cards":[
+    {"Question":"Write the value of PI upto 2 decimal places?", "Answer":"3.14"},
+    {"Question":"Square of 9?", "Answer":"81"},
+    {"Question":"What is 1+1", "Answer":"2"},
+    {"Question":"What is 0 factorial", "Answer":"0"},
+    {"Question":"what is 2 to the power 10", "Answer":"1024"}
+
+]},
+"Chemistry":
+
+{
+	"cards":[
+    {"Question":"What is the first element on the periodic table?", "Answer":"Hydrogen"},
+    {"Question":"What is the centre of an atom called?", "Answer":"Nucleus"},
+    {"Question":"True or false? Acids have a pH level below 7", "Answer":"True"},
+    {"Question":"True or false? An electron carries a positive charge", "Answer":"False"},
+    {"Question":"What is the fourth most abundant element in the universe in terms of mass?", "Answer":"Carbon"}
+
+]}
+
+}
