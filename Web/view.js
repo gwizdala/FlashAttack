@@ -2,7 +2,7 @@ var view = function() {
 var vm = this;
 vm.answerBox = document.getElementById("AnswerTextBox");
 vm.questionBox = document.getElementById("QuestionTextBox");
-vm.submitButton = document.getElementById("SubmitButtom");
+vm.submitButton = document.getElementById("SubmitButton");
 if(vm.answerBox == null || vm.questionBox == null)
 {
   alert("Answer/Question box null, won't work");
@@ -10,17 +10,21 @@ if(vm.answerBox == null || vm.questionBox == null)
 }
 
 view.prototype.setQuestionBox = function() {
-return vm.questionBox;
+return this.questionBox;
 }
 view.prototype.getAnswerBox = function() {
-return vm.answerBox;
+return this.answerBox;
 }
 view.prototype.setQuestionText = function(value) {
-return vm.questionBox.value;
+this.questionBox.innerHTML = value;
 //Access Document
-
 }
 view.prototype.getAnswerText = function() {
-return vm.answerBox.value;
+return this.answerBox.value;
 //Access Document
+}
+
+view.prototype.submit = function() {
+//Access Document
+return this.submitButton;
 }

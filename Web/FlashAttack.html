@@ -19,27 +19,25 @@
 
 
 <div class="BattleScreenFlashCards">
-  <form>
     <table>
       <tr>
         <td>
-          <p class="QuestionText">Add the questions here</p>
+          <p id="QuestionTextBox" class="QuestionText"></p>
         </td>
       </tr>
       <tr>
         <table>
           <tr>
             <td>
-              <input class="AnswerText" type="text" name="answer" autofocus><br>
+              <input id="AnswerTextBox" class="AnswerText" type="text" name="answer" autofocus><br>
             </td>
             <td>
-              <input type="submit" value="FIGHT!" class="AnswerButton">
+              <input id="SubmitButton" type="button" value="FIGHT!" class="AnswerButton">
             </td>
           </tr>
         </table>
       </tr>
     </table>
-  </form>
 </div>
 
 
@@ -47,6 +45,7 @@
 v = new view();
 m = new model();
 c = new controller(v,m);
+
 </script>
 <script src="Battle.js"></script>
 
