@@ -9,12 +9,32 @@ b.ctx = b.canvas.getContext("2d");
 b.div = document.getElementById("battleScreenAnimation");
 b.canvas.width = b.div.clientWidth;
 b.canvas.height = b.div.clientHeight;
-
+b.animationIndex = 0;
+b.frameindex = 0;
 //Variables to be sent by the view
 b.numPlayerLives;
 b.numPlayerLivesLeft;
 b.numMonsterLives;
 b.numMonsterLivesLeft;
+
+b.punch = new Audio("Sounds/Punch.mp3");
+b.chomp = new Audio("Sounds/Chomp.wav");
+b.background = new Audio("Sounds/Background.ogg");
+b.background.addEventListener('ended', function() {
+	b.background.currentTime = 0;
+	b.background.play();
+}, false);
+b.background.play();
+b.monsterAttackBool = false;
+b.playerAttackBool = false;
+
+
+b.monsterAttackIndexStart =3;
+b.monsterAttackIndexMax = 6;
+
+b.playerAttackIndexStart = 7;
+b.playerAttackIndexMax = 10;
+
 
 // Scaling factor
 b.scaleFactor = 1;
@@ -25,7 +45,7 @@ b.playerImage = new Image();
 b.playerImage.onload = function () {
 	b.playerReady = true;
 };
-b.playerImage.src = "images/player.png";
+b.playerImage.src = "images/playerSprite.png";
 
 // Heart image (lives)
 b.heartReady = false;
@@ -41,7 +61,7 @@ b.monsterImage = new Image();
 b.monsterImage.onload = function () {
 	b.monsterReady = true;
 };
-b.monsterImage.src = "images/monster.png";
+b.monsterImage.src = "images/enemySprite.png";
 
 // Game objects
 b.player = {};
@@ -60,7 +80,7 @@ Battle.prototype.refresh = function () {
 	this.checkScaling();
 
 	this.player.x = 50*this.scaleFactor;
-	this.player.y = this.canvas.height - 320*this.scaleFactor;
+	this.player.y = this.canvas.height - 180*this.scaleFactor;
 
 	this.monster.x = this.canvas.width - (370*this.scaleFactor);
 	this.monster.y = this.canvas.height - 320*this.scaleFactor;
@@ -91,10 +111,11 @@ Battle.prototype.update = function (isCorrect, newPlayerLives, newMonsterLives) 
 
 
 	if( isCorrect ) {
-			//display success logic here
+			this.playerAttackBool = true;
+			this.animationIndex = this.playerAttackIndexStart;
 	}
 	else {
-			//display failure logic here
+			this.monsterAttackBool = true;
 	}
 		this.numPlayerLivesLeft = newPlayerLives;
 		this.numMonsterLivesLeft = newMonsterLives;
@@ -104,17 +125,65 @@ Battle.prototype.update = function (isCorrect, newPlayerLives, newMonsterLives) 
 // Draw everything
 Battle.prototype.render = function () {
 
+	if(this.frameindex >= 11){
+		this.frameindex = 0;
+		if(this.playerAttackBool)
+		{
+				if(this.animationIndex >= this.playerAttackIndexMax)
+				{
+						this.playerAttackBool = false;
+						this.animationIndex = 0;
+				}
+				else {
+					this.punch.play();
+					this.animationIndex += 1;
+				}
+		}
+		else if(this.monsterAttackBool)
+		{
+			if(this.animationIndex >= this.monsterAttackIndexMax)
+			{
+					this.monsterAttackBool = false;
+					this.animationIndex = 0;
+			}
+			else {
+				this.chomp.play();
+				this.animationIndex += 1;
+			}
+		}
+		else {
+			if(this.animationIndex == 1)
+			{
+				this.animationIndex = 0;
+			}
+			else {
+				this.animationIndex = 1;
+			}
+		}
+	}
+	else {
+		this.frameindex += 1;
+	}
+
+
+
+
+
+
+
 	// Player paint
 	if (this.playerReady) {
-		this.ctx.drawImage(this.playerImage, this.player.x, this.player.y,
-			this.playerImage.width*this.scaleFactor, this.playerImage.height*this.scaleFactor);
+		//this.ctx.drawImage(this.playerImage, this.player.x, this.player.y,
+			//	this.playerImage.width*this.scaleFactor, this.playerImage.height*this.scaleFactor);
+			this.ctx.drawImage(this.playerImage,(800 * this.animationIndex),0,800,800,this.player.x,this.player.y,200*this.scaleFactor, 200*this.scaleFactor);
+
 	}
 
 	// Monster Paint
 	if (this.monsterReady) {
-		this.ctx.drawImage(this.monsterImage, this.monster.x, this.monster.y,
-			this.monsterImage.width*this.scaleFactor, this.monsterImage.height*this.scaleFactor);
-
+	//	this.ctx.drawImage(this.monsterImage, this.monster.x, this.monster.y,
+		//	this.monsterImage.width*this.scaleFactor, this.monsterImage.height*this.scaleFactor);
+		 this.ctx.drawImage(this.monsterImage,(1024 * this.animationIndex),0,1024,1024,this.monster.x,this.monster.y,320*this.scaleFactor, 320*this.scaleFactor);
 			// Total Monster Lives
 			// Rectangle is 500x56
 			this.ctx.beginPath();
