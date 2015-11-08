@@ -5,6 +5,9 @@ var div = document.getElementById("battleScreenAnimation");
 canvas.width = div.clientWidth;
 canvas.height = div.clientHeight;
 
+// Scaling factor
+var scaleFactor = 1;
+
 // Player image
 var playerReady = false;
 var playerImage = new Image();
@@ -38,12 +41,37 @@ var monster = {};
 // This will move the players to correct locations
 // based on resizing of display
 var refresh = function () {
-	player.x = 50;
-	player.y = canvas.height - 320;
+	canvas.width = div.clientWidth;
+	canvas.height = div.clientHeight;
 
-  monster.x = canvas.width - 370;
-  monster.y = canvas.height - 320;
+	checkScaling();
+
+	player.x = 50*scaleFactor;
+	player.y = canvas.height - 320*scaleFactor;
+
+	monster.x = canvas.width - (370*scaleFactor);
+	monster.y = canvas.height - 320*scaleFactor;
 };
+
+// Check for scaling parameters
+var checkScaling = function() {
+	var heightScale = 1;
+	var widthScale = 1;
+	if(canvas.width < 1000) {
+		widthScale = (canvas.width / 1000);
+	}
+	if(canvas.height < 400) {
+		heightScale = (canvas.height / 400);
+	}
+
+	if(widthScale < heightScale)
+	{
+		scaleFactor = widthScale;
+	}
+	else {
+		scaleFactor = heightScale;
+	}
+}
 
 // Update game objects
 var update = function (modifier) {
@@ -60,8 +88,6 @@ var update = function (modifier) {
 
 // Draw everything
 var render = function () {
-	canvas.width = div.clientWidth;
-	canvas.height = div.clientHeight;
 
 	//Variables to be sent by the view
 	var numPlayerLives = 3;
@@ -71,24 +97,24 @@ var render = function () {
 
 	// Player paint
 	if (playerReady) {
-		ctx.drawImage(playerImage, player.x, player.y);
+		ctx.drawImage(playerImage, player.x, player.y, playerImage.width*scaleFactor, playerImage.height*scaleFactor);
 	}
 
 	// Monster Paint
 	if (monsterReady) {
-		ctx.drawImage(monsterImage, monster.x, monster.y);
+		ctx.drawImage(monsterImage, monster.x, monster.y, monsterImage.width*scaleFactor, monsterImage.height*scaleFactor);
 
 		// Total Monster Lives
 		// Rectangle is 500x56
 		ctx.beginPath();
 		ctx.strokeStyle = "white";
-		ctx.rect((canvas.width - 505), 5, 500, 56);
+		ctx.rect((canvas.width - (505*scaleFactor)), 5*scaleFactor, 500*scaleFactor, 56*scaleFactor);
 		ctx.lineWidth="3";
 		ctx.stroke();
 		// Monster Lives Left
 		ctx.beginPath();
 		ctx.fillStyle = "red";
-		ctx.rect((canvas.width - 505), 5, 500*(numMonsterLivesLeft/numMonsterLives), 56);
+		ctx.rect((canvas.width - (505*scaleFactor)), 5*scaleFactor, 500*(numMonsterLivesLeft/numMonsterLives)*scaleFactor, 56*scaleFactor);
 		ctx.fill();
 		ctx.stroke();
 	}
@@ -98,8 +124,8 @@ var render = function () {
 		// Heart is 64x56
 		heart.y = 5;
 		for(var i = 0; i < numPlayerLivesLeft; i++) {
-					heart.x = i*67 + 5;
-			    ctx.drawImage(heartImage, heart.x, heart.y);
+					heart.x = (i*heartImage.width + 5)*scaleFactor;
+			    ctx.drawImage(heartImage, heart.x, heart.y, heartImage.width*scaleFactor, heartImage.height*scaleFactor);
 		}
   }
 
