@@ -1,30 +1,31 @@
 
 var controller = function(v, m){
 var vm = this;
-getnewCard();
-/*class character {
-
-	constructor(life){
-		this.life = life ;
-
-	}
-}
-
-
-player = new character(3);
-boss = new character(5);
-*/
-
+  console.log("Starting game Lives:" + m.getCurrentGame().currentLives())
+  getnewCard();
 	v.submit().addEventListener("click",function() {
 		var answer = v.getAnswerText();
 		var correctAnswer = vm.c.Answer;
 		if(answer.localeCompare(correctAnswer) == 0){
-			alert("correct");
-			getnewCard();
+      console.log("GOOD JOB");
+      if(!m.getCurrentGame().isVictory())
+      {
+        getnewCard();
+      }
+      else {
+        alert("Victory!");
+      }
 		}
 		else{
-			alert("incorrect");	
-			getnewCard();
+      m.getCurrentGame().loseLife();
+      console.log("LOST LIFE :(");
+      if(!m.getCurrentGame().isGameOver())
+      {
+        getnewCard();
+      }else {
+        alert("Game Over!");
+      }
+
 		}
 
 	});
@@ -32,11 +33,8 @@ boss = new character(5);
 
 
 	function getnewCard(){
-
-		vm.c = m.getCard();
-		console.log(vm.c);
+		vm.c = m.getCurrentGame().getCard();
 		v.setQuestionText(vm.c.Question);
-
 	}
 
 }
