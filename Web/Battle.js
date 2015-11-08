@@ -87,15 +87,17 @@ Battle.prototype.checkScaling = function() {
 }
 
 // Update game objects
-Battle.prototype.update = function (modifier) {
+Battle.prototype.update = function (isCorrect, newPlayerLives, newMonsterLives) {
 
-/*	if( Attack Scenario) {
 
-}
-
-	if ( refresh scenario ) {
-		refresh();
-	}*/
+	if( isCorrect ) {
+			//display success logic here
+	}
+	else {
+			//display failure logic here
+	}
+		this.numPlayerLivesLeft = newPlayerLives;
+		this.numMonsterLivesLeft = newMonsterLives;
 		this.refresh();
 };
 
@@ -123,7 +125,7 @@ Battle.prototype.render = function () {
 		// Monster Lives Left
 		this.ctx.beginPath();
 		this.ctx.fillStyle = "red";
-		this.ctx.rect((canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor,
+		this.ctx.rect((this.canvas.width - (505*this.scaleFactor)), 5*this.scaleFactor,
 									500*(this.numMonsterLivesLeft/this.numMonsterLives)*this.scaleFactor, 56*this.scaleFactor);
 		this.ctx.fill();
 		this.ctx.stroke();
@@ -148,7 +150,6 @@ Battle.prototype.main = function () {
 	var now = Date.now();
 	var delta = now - this.then;
 
-	this.update(delta / 1000);
 	this.render();
 
 	then = now;
@@ -159,10 +160,14 @@ Battle.prototype.main = function () {
 	});
 };
 
-Battle.prototype.startRender = function() {
+Battle.prototype.startRender = function(originalPlayerLives, originalMonsterLives) {
 	// Cross-browser support for requestAnimationFrame
 	var w = window;
 	requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+
+	// Set up initial lives
+	this.numPlayerLives = originalPlayerLives;
+	this.numMonsterLives = originalMonsterLives;
 
 	// Game Init
 	this.refresh();

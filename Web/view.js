@@ -10,12 +10,12 @@ if(vm.answerBox == null || vm.questionBox == null)
 }
 }
 
-view.prototype.startRender = function() {
-  this.b.startRender();
+view.prototype.startRender = function(originalPlayerLives, originalMonsterLives) {
+  this.b.startRender(originalPlayerLives, originalMonsterLives);
 }
 
-view.prototype.updateBattle = function(){
-  this.b.update();
+view.prototype.updateBattle = function( isCorrect, newPlayerLives, newMonsterLives){
+  this.b.update(isCorrect, newPlayerLives, newMonsterLives);
 }
 
 view.prototype.setQuestionBox = function() {
