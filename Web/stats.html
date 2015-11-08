@@ -9,7 +9,8 @@
   <table>
     <tr>
     <td><script text/javascript>
-        if(sessionStorage.getItem("winCondition") == true) {
+    console.log(sessionStorage.getItem("winCondition"));
+        if(sessionStorage.getItem("winCondition") == "true") {
           document.write("YOU WIN!");
         }
         else {
